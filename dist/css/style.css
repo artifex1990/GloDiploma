@@ -8957,3 +8957,7 @@ strong {
 .slider-dots {
     display: none;
 }
+
+.visible {
+  visibility: visible;  
+}
