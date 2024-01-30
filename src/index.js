@@ -1,7 +1,11 @@
-import { headerContactPhone } from './modules/headerContactPhone';
-import { headerMenu } from './modules/headerMenu';
+import { main } from './modules/main';
+import { menu } from './modules/menu';
+import { phones } from './modules/phones';
+import { regular } from './modules/regular';
 import { repairTypes } from './modules/repairTypes';
 
-headerContactPhone();
-headerMenu();
+main();
+menu();
+phones();
 repairTypes();
+regular();

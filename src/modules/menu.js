@@ -1,4 +1,4 @@
-export const headerMenu = () => {
+export const menu = () => {
   const menu = document.querySelector('.menu');
   const dialogMain = document.querySelector('.popup-dialog-menu');
   const btnFooterUp = document.querySelector('.button-footer > a');
@@ -22,6 +22,10 @@ export const headerMenu = () => {
 
   dialogMain.addEventListener('click', (e) => {
     e.preventDefault();
+
+    if (e.target.closest('.link-list')) {
+      popupRepairTypes.style.visibility = 'visible';
+    }
 
     if (e.target.tagName.toLowerCase() === 'a' && !e.target.closest('.link-list')) {
       animationScroll(e.target);
