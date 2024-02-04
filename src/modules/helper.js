@@ -30,3 +30,11 @@ export const phoneMask = (phoneInput, format = 'ru') => {
 
   return '';
 };
+
+export const getData = (url) => {
+  return fetch(url).then(res => res.json()).catch(error => error.message);
+};
+
+export const unique = (array = []) => {
+  return [... new Set(array)];
+};
