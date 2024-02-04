@@ -1,10 +1,13 @@
 import { filter } from "./filter";
+import { dateLocal } from "./helper";
 
 export const repair = () => {
   const filterRepairType = document.querySelector('.nav-list-popup-repair');
   const popupRepairTypes = document.querySelector('.popup-repair-types');
   const repairLinks = document.querySelectorAll('.link-list > a');
   const jobsTable = document.querySelector('.popup-repair-types-content-table__list');
+  const titleRepair = document.getElementById('switch-inner');
+  const dateModify = document.querySelector('.popup-repair-types-content__head-date');
 
   const filterView = async () => {
     const textFilters = await filter();
@@ -24,6 +27,8 @@ export const repair = () => {
         }
 
         e.target.classList.toggle('active');
+
+        titleRepair.innerText = e.target.textContent;
         jobsService.getFilterTypes(e.target.textContent).then(data => printTableJobs(data));
       });
 
@@ -58,7 +63,10 @@ export const repair = () => {
   };
 
   const render = () => {
+    titleRepair.innerText = 'Все услуги!';
+
     filterView();
+    config.getConfig().then(config => dateModify.innerHTML = `${dateLocal(config.date_modify)} <i><i></i></i>`);
     jobsService.getJobs().then(data => printTableJobs(data));
   };
 

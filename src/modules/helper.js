@@ -38,3 +38,31 @@ export const getData = (url) => {
 export const unique = (array = []) => {
   return [... new Set(array)];
 };
+
+export const dateLocal = (date, locale = 'ru-Ru') => {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const newDate  = new Date(date);
+
+  return newDate.toLocaleDateString(locale, options);
+};
+
+export const setCookie = (name, value, maxAgeSecond) => {
+  document.cookie = `${name}=${value}; max-age=${maxAgeSecond}; secure`;
+};
+
+export const getCookie = (name) => {
+  const cookie = {};
+  const cookieParams = document.cookie.split(';');
+  
+  if (cookieParams.length) {
+    cookieParams.forEach(param => {
+      const params = param.trim().split('=');
+      cookie[params[0]] = params[1] ? params[1] : '';
+    });
+  } else {
+    const params = cookieParams.trim().split('=');
+    cookie[params[0]] = params[1] ? params[1] : '';
+  }
+
+  return cookie[name];
+};
