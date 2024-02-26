@@ -12,4 +12,8 @@ export class JobsService {
   getDateModify() {
     return getData(`http://localhost:4545/dateModify`);
   }
+
+  getSortJobs(sortOption) {
+    return getData(`http://localhost:4545/jobs?_sort=${sortOption.name}&_order=${sortOption.value}`);
+  }
 };

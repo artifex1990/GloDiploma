@@ -1,6 +1,7 @@
 import { filter } from "../filter";
 
 export const items = () => {
+  const table = document.getElementById('table');
   const filterItems = document.getElementById('typeItem');
 
   const filterView = async () => {
@@ -78,8 +79,38 @@ export const items = () => {
       jobsService.getJobs().then(data => printTableJobs(data));
     } else {
       jobsService.getFilterTypes(e.target.value).then(data => printTableJobs(data));
-    }
+    } 
+  });
+
+  table.addEventListener('click', (e) => {
+    const th = e.target.closest('th');
     
+    if (th) {
+      const svg = e.target.closest('.icon-sort') ?? e.target.querySelector('.icon-sort');
+      let type = '';
+      let order = 'desc';
+
+      if (svg) {
+        th.classList.forEach(className => {
+          if (className.includes('th-')) {
+            type = className.split('-')[1];
+          }
+        });
+
+        if (svg.classList.contains('sorting')) {
+          svg.classList.remove('sorting');
+          order = 'asc';
+        } else {
+          svg.classList.add('sorting');
+          order = 'desc';
+        }
+
+        jobsService.getSortJobs({
+          name: type,
+          value: order
+        }).then(data => printTableJobs(data));
+      }
+    }
   });
 
   render();
